@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="Sample" Language="1033" Version="1.0.0.0" Manufacturer="Manufacturer" UpgradeCode="*">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+		<Media Id="1" EmbedCab="yes" Cabinet="cab1.cab"/>
+
+		<Feature Id="ProductFeature" Title="Sample" Level="1">
+			<ComponentGroupRef Id="SampleComponentGroup" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="ManFolder" Name="Manufacturer" >
+					<Directory Id="INSTALLFOLDER" Name="Sample" >
+					</Directory>
+				</Directory>
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<DirectoryRef Id="INSTALLFOLDER">
+			<Component Id="SampleComponentID" Guid="*">
+				<File Id="SampleFileID" KeyPath="yes" Source="Sample.txt" />
+			</Component>
+		</DirectoryRef>
+	</Fragment>
+	<Fragment>
+		<ComponentGroup Id="SampleComponentGroup">
+			<ComponentRef Id="SampleComponentID" />
+		</ComponentGroup>
+	</Fragment>
+</Wix>
